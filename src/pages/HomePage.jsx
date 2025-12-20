@@ -7,7 +7,7 @@ import BusinessModelSection from '../components/BusinessModelSection';
 import PricingSection from '../components/PricingSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
-import { fishVarieties } from '../mockData';
+import { fishVarieties, oceanToTableImages } from '../mockData';
 import { preloadImages } from '../utils/imagePreloader';
 
 const HomePage = () => {
@@ -16,10 +16,11 @@ const HomePage = () => {
     const allFishImages = fishVarieties.map(fish => fish.image);
     const businessImages = ['/images/business/fish-9.jpeg', '/images/business/fish-10.jpeg'];
     const aboutImages = ['/images/about/fish-on-table.png'];
+    const processImages = oceanToTableImages.map(item => item.image);
     
     // Preload all images after a short delay to not block initial render
     setTimeout(() => {
-      preloadImages([...allFishImages, ...businessImages, ...aboutImages]);
+      preloadImages([...allFishImages, ...businessImages, ...aboutImages, ...processImages]);
     }, 100);
   }, []);
 
