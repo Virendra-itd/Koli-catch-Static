@@ -123,6 +123,6 @@ export const supplyChain = [
 export const contactInfo = {
   phone: '+91 96993 52316',
   email: 'info@kolicatch.io',
-  address: 'Mumbai Fish Market, Sassoon Docks, Mumbai - 400001',
+  address: 'Shop No 04, Ganesh Apartment, Sector 34 Road, Riverside Hotel, Kamothe, Panvel, Navi Mumbai, Raigad, Maharashtra - 410209',
   whatsapp: '+91 96993 52316'
 };
