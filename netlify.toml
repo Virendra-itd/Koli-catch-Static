@@ -2,7 +2,7 @@
   # Build command
   command = "yarn build"
   # Directory to publish
-  publish = "build"
+  publish = "dist"
   # Node version
   node_version = "18"
 

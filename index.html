@@ -25,9 +25,6 @@
         <!-- Session Recording Scripts (async to not block rendering) -->
         <script async src="https://unpkg.com/rrweb@latest/dist/rrweb.min.js"></script>
         <script async src="https://d2adkz2s9zrlge.cloudfront.net/rrweb-recorder-20250919-1.js"></script>
-        
-        <!-- Main CSS -->
-        <link href="/static/css/main.a03132aa.css" rel="stylesheet" />
     </head>
     <body>
         <noscript>
@@ -155,8 +152,7 @@
             });
         </script>
         
-        <!-- Main JavaScript Bundle -->
-        <script defer="defer" src="/static/js/main.2a3757cb.js"></script>
+        <!-- Loading indicator and error handling script -->
         <script>
             (function() {
                 'use strict';
@@ -255,8 +251,10 @@
                     }, 1000);
                 });
                 
-                // Error handling for failed script loads
+                // Error handling for failed script loads and runtime errors
                 window.addEventListener('error', function(e) {
+                    console.error('Error caught:', e.error || e.message, e.filename, e.lineno);
+                    
                     if (e.target && e.target.tagName === 'SCRIPT') {
                         console.error('Failed to load script:', e.target.src);
                         
@@ -264,23 +262,56 @@
                         if (!reactMounted && !errorShown) {
                             var isCriticalScript = e.target.src && (
                                 e.target.src.includes('main.') || 
-                                e.target.src.includes('bundle.')
+                                e.target.src.includes('bundle.') ||
+                                e.target.src.includes('src/main')
                             );
                             
                             if (isCriticalScript) {
-                                showError('Failed to load the application. Please check your internet connection and try refreshing the page.');
+                                var errorMsg = 'Failed to load the application script. ';
+                                if (e.error && e.error.message) {
+                                    errorMsg += 'Error: ' + e.error.message;
+                                } else if (e.message) {
+                                    errorMsg += 'Error: ' + e.message;
+                                } else {
+                                    errorMsg += 'Please check your internet connection and try refreshing the page.';
+                                }
+                                showError(errorMsg);
                             }
                         }
+                    } else if (e.error && !reactMounted && !errorShown) {
+                        // Catch other JavaScript errors
+                        var errorMsg = 'Application error: ';
+                        if (e.error.message) {
+                            errorMsg += e.error.message;
+                        } else if (e.message) {
+                            errorMsg += e.message;
+                        } else {
+                            errorMsg += 'An unexpected error occurred.';
+                        }
+                        if (e.filename) {
+                            errorMsg += ' (File: ' + e.filename + ')';
+                        }
+                        showError(errorMsg);
                     }
                 }, true);
                 
                 // Handle unhandled promise rejections
                 window.addEventListener('unhandledrejection', function(e) {
                     console.error('Unhandled promise rejection:', e.reason);
-                    // Don't show error UI for promise rejections, just log
+                    if (!reactMounted && !errorShown) {
+                        var errorMsg = 'Application error: ';
+                        if (e.reason && e.reason.message) {
+                            errorMsg += e.reason.message;
+                        } else if (typeof e.reason === 'string') {
+                            errorMsg += e.reason;
+                        } else {
+                            errorMsg += 'An unexpected error occurred.';
+                        }
+                        showError(errorMsg);
+                    }
                 });
             })();
         </script>
+        <script type="module" src="/src/main.jsx"></script>
     </body>
 </html>
-

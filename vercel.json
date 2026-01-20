@@ -1,12 +1,13 @@
 {
+  "version": 2,
   "buildCommand": "yarn build",
-  "outputDirectory": "build",
-  "devCommand": "yarn start",
+  "outputDirectory": "dist",
   "installCommand": "yarn install",
-  "framework": "create-react-app",
+  "framework": "vite",
+  "nodeVersion": "20.x",
   "rewrites": [
     {
-      "source": "/((?!static|images|favicon\\.png|.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ],
@@ -65,4 +66,3 @@
     }
   ]
 }
-

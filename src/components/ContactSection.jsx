@@ -208,7 +208,7 @@ const ContactSection = () => {
       };
 
       // Try to send via backend API if available
-      const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+      const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
       let emailSent = false;
       let lastError = null;
 
@@ -288,9 +288,9 @@ const ContactSection = () => {
   const sendEmailViaService = async (emailData) => {
     try {
       // Option 1: Try EmailJS if configured (no verification needed, secure)
-      const emailjsServiceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
-      const emailjsTemplateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
-      const emailjsPublicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+      const emailjsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const emailjsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const emailjsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
       if (emailjsServiceId && emailjsTemplateId && emailjsPublicKey) {
         const emailjs = await import('@emailjs/browser');
@@ -315,7 +315,7 @@ const ContactSection = () => {
       }
 
       // Option 2: Use Web3Forms if key is configured (no verification needed)
-      const web3formsKey = process.env.REACT_APP_WEB3FORMS_KEY || '2921dde2-ddc9-4557-be2c-9aae063c492f';
+      const web3formsKey = import.meta.env.VITE_WEB3FORMS_KEY;
       
       if (web3formsKey) {
         const response = await fetch('https://api.web3forms.com/submit', {
@@ -364,15 +364,15 @@ const ContactSection = () => {
       console.log('     - {{order_type}}');
       console.log('     - {{message}}');
       console.log('  5. Add to .env file:');
-      console.log('     REACT_APP_EMAILJS_SERVICE_ID=your_service_id');
-      console.log('     REACT_APP_EMAILJS_TEMPLATE_ID=your_template_id');
-      console.log('     REACT_APP_EMAILJS_PUBLIC_KEY=your_public_key');
+      console.log('     VITE_EMAILJS_SERVICE_ID=your_service_id');
+      console.log('     VITE_EMAILJS_TEMPLATE_ID=your_template_id');
+      console.log('     VITE_EMAILJS_PUBLIC_KEY=your_public_key');
       console.log('');
       console.log('Option 2: Web3Forms (Alternative - No verification needed)');
       console.log('  1. Go to: https://web3forms.com/');
       console.log('  2. Get free access key');
       console.log('  3. Add to .env file:');
-      console.log('     REACT_APP_WEB3FORMS_KEY=your_access_key');
+      console.log('     VITE_WEB3FORMS_KEY=your_access_key');
       console.log('');
       console.log('═══════════════════════════════════════════════════════════');
       throw new Error('Email service not configured. Check console for setup instructions.');
