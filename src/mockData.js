@@ -120,32 +120,9 @@ export const supplyChain = [
   }
 ];
 
-export const oceanToTableImages = [
-  {
-    id: 1,
-    image: '/images/business/fish-11.jpeg',
-    alt: 'Early Morning Catch'
-  },
-  {
-    id: 2,
-    image: '/images/business/fish-12.jpeg',
-    alt: 'Quality Inspection'
-  },
-  {
-    id: 3,
-    image: '/images/business/fish-13.jpg',
-    alt: 'Processing'
-  },
-  {
-    id: 4,
-    image: '/images/business/fish-14.jpg',
-    alt: 'Your Table'
-  }
-];
-
 export const contactInfo = {
   phone: '+91 96993 52316',
   email: 'info@kolicatch.io',
-  address: 'Shop No 04, Ganesh Apartment, Sector 34 Road, Riverside Hotel, Kamothe, Panvel, Navi Mumbai, Raigad, Maharashtra - 410209',
+  address: 'Mumbai Fish Market, Sassoon Docks, Mumbai - 400001',
   whatsapp: '+91 96993 52316'
 };

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Anchor, Ship, Award, Users } from 'lucide-react';
 import OptimizedImage from './OptimizedImage';
-import { oceanToTableImages } from '../mockData';
 
 const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -100,63 +99,32 @@ const AboutSection = () => {
           })}
         </div>
 
-        <div className={`mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-start transition-all duration-150 ease-out ${
+        <div className={`mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center transition-all duration-150 ease-out ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'
         }`} style={{ willChange: 'transform, opacity' }}>
-          {/* Image Grid - 2x2 Layout */}
           <div className="relative">
-            <div className="grid grid-cols-2 gap-4">
-              {oceanToTableImages.map((item, index) => (
-                <div
-                  key={item.id}
-                  className={`relative group overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 ${
-                    index === 0 ? 'h-56' : index === 1 ? 'h-56' : index === 2 ? 'h-56' : 'h-56'
-                  }`}
-                  style={{
-                    transitionDelay: `${index * 50}ms`
-                  }}
-                >
-                  <OptimizedImage
-                    src={item.image}
-                    alt={item.alt}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    sectionVisible={isVisible}
-                    style={{ height: '100%' }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#003366]/60 via-[#003366]/20 to-transparent opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
-                </div>
-              ))}
-            </div>
-            <div className="absolute inset-0 bg-[#003366]/5 rounded-2xl -z-10"></div>
+            <OptimizedImage
+              src="/images/about/fish-on-table.png"
+              alt="Fresh Seafood"
+              className="rounded-2xl shadow-2xl w-full h-[400px] object-cover"
+              eager={true} // Eager load since it's a prominent section image
+              sectionVisible={isVisible} // Also load when section becomes visible
+              style={{ height: '400px' }}
+            />
+            <div className="absolute inset-0 bg-[#003366]/20 rounded-2xl"></div>
           </div>
-          
-          {/* Text Content */}
-          <div className="flex flex-col justify-center h-full">
+          <div>
             <h3 className="text-3xl font-bold text-[#003366] mb-6">From Ocean to Your Table</h3>
-            <div className="space-y-4">
-              <p className="text-gray-700 leading-relaxed">
-                Our journey begins before sunrise, when our fishermen set sail into the Arabian Sea. 
-                With decades of experience and deep respect for the ocean, they ensure only the finest 
-                catch makes it to our facility.
-              </p>
-              <p className="text-gray-700 leading-relaxed">
-                Once ashore, each fish undergoes rigorous quality checks and is processed in our 
-                state-of-the-art hygienic facility. We maintain the cold chain from catch to delivery, 
-                ensuring you receive seafood that's as fresh as it gets.
-              </p>
-              <p className="text-gray-700 leading-relaxed">
-                Our expert team carefully inspects every fish for freshness, size, and quality. Only 
-                the best specimens are selected, then cleaned and prepared according to your preferences. 
-                Whether you need whole fish, fillets, or custom cuts, our skilled butchers handle each 
-                order with precision and care.
-              </p>
-              <p className="text-gray-700 leading-relaxed">
-                The final step is our temperature-controlled packaging system. Each order is carefully 
-                packed with ice and insulated materials to maintain optimal freshness during transit. 
-                From the moment we receive your order to when it arrives at your doorstep, we ensure 
-                the cold chain is never broken.
-              </p>
-            </div>
+            <p className="text-gray-700 mb-4 leading-relaxed">
+              Our journey begins before sunrise, when our fishermen set sail into the Arabian Sea. 
+              With decades of experience and deep respect for the ocean, they ensure only the finest 
+              catch makes it to our facility.
+            </p>
+            <p className="text-gray-700 leading-relaxed">
+              Once ashore, each fish undergoes rigorous quality checks and is processed in our 
+              state-of-the-art hygienic facility. We maintain the cold chain from catch to delivery, 
+              ensuring you receive seafood that's as fresh as it gets.
+            </p>
           </div>
         </div>
       </div>

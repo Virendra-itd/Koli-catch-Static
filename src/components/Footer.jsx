@@ -1,20 +1,36 @@
 import React from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
 import { contactInfo } from '../mockData';
 
 const Footer = () => {
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  const navigate = useNavigate();
+  const location = useLocation();
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+  const scrollToSection = (sectionId) => {
+    // If we're not on the home page, navigate there first
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: sectionId } });
+    } else {
+      // We're already on home page, just scroll
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const headerOffset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 50);
     }
+  };
+
+  const goToHome = () => {
+    navigate('/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -22,7 +38,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-3 mb-4">
+            <div className="flex items-center space-x-3 mb-4 cursor-pointer" onClick={goToHome}>
               <img
                 src="/images/logos/logo-dark.png"
                 alt="Koli Catch Logo"
@@ -138,12 +154,12 @@ const Footer = () => {
               © {new Date().getFullYear()} Koli Catch. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-white/60 hover:text-white transition-colors duration-300">
+              <Link to="/privacy-policy" className="text-white/60 hover:text-white transition-colors duration-300">
                 Privacy Policy
-              </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors duration-300">
+              </Link>
+              <Link to="/terms-of-service" className="text-white/60 hover:text-white transition-colors duration-300">
                 Terms of Service
-              </a>
+              </Link>
               <a href="#" className="text-white/60 hover:text-white transition-colors duration-300">
                 Refund Policy
               </a>
