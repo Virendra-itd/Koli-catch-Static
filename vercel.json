@@ -4,13 +4,6 @@
   "outputDirectory": "dist",
   "installCommand": "yarn install",
   "framework": "vite",
-  "redirects": [
-    {
-      "source": "/:path*",
-      "destination": "https://shop.kolicatch.io/:path*",
-      "permanent": true
-    }
-  ],
   "rewrites": [
     {
       "source": "/(.*)",
